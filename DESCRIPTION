@@ -1,0 +1,13 @@
+Package: astror
+Title: Package scaling radio astronomy images
+Description: This package provides helper routines to assist in scaling
+    matricies of values to fit in a normal image. 
+Version: 0.01
+Author: Roma Klapaukh <roma@ecs.vuw.ac.nz>
+Maintainer: Roma Klapaukh <roma@ecs.vuw.ac.nz>
+Imports: 
+    Rcpp
+Suggests: 
+    FITSio
+License: LGPL-3
+LinkingTo: Rcpp

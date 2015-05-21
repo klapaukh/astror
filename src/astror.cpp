@@ -79,6 +79,9 @@ NumericMatrix gradientDomainHDRCompression(NumericMatrix extractedLuminance,
   //copy values from extractedLuminance to luminance
   for(int i =0; i < rows * columns ; i++){
     luminance[i] = extractedLuminance[i];
+    if(std::isnan(extractedLuminance[i]) || NumericMatrix::is_na(extractedLuminance[i])){
+      stop("There is a missing value in the extractedLuminance. This is not allowed");
+    }
   }
 
 

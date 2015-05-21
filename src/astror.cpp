@@ -24,12 +24,8 @@
 #include "squish_luminance.h"
 #include "solve_poisson.h"
 
-//============================================================================
-//    main function
-//============================================================================
 
-
-
+using namespace Rcpp;
 
 //' Squishes the contrast in an input luminance matrix. 
 //' A great deal of tweaking of the

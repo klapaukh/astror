@@ -62,14 +62,14 @@ using namespace Rcpp;
 //'        converge, and you'll need to abort this program.
 //' @export
 // [[Rcpp::export]]
-NumericMatrix gradientDomainHDRCompression(NumericMatrix extractedLuminance, double alpha, double beta, double delta, double theta, double epsilon, double saturation){
-
-  alpha = 0.1;
-  beta = 0.1;
-  delta = 1.1;
-  theta = 0;
-  epsilon = 0.0001;
-  saturation = 1;
+NumericMatrix gradientDomainHDRCompression(NumericMatrix extractedLuminance, 
+    double alpha = 0.1, 
+    double beta = 0.1, 
+    double delta = 1.1, 
+    double theta = 0, 
+    double epsilon = 0.0001, 
+    double saturation = 1 
+    ){
 
   int rows = extractedLuminance.nrow();
   int columns = extractedLuminance.ncol();

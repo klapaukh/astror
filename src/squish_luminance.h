@@ -30,7 +30,7 @@
 
 
 
-#include "shared_array.hh"
+#include "shared_array.h"
 
 //============================================================================
 //    SquishLuminance function

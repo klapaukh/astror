@@ -28,9 +28,9 @@
 #include <limits>
 #include <cmath>
 
-#include "squish_luminance.hh"
-#include "solve_poisson.hh"
-#include "helpers.hh"
+#include "squish_luminance.h"
+#include "solve_poisson.h"
+#include "helpers.h"
 
 namespace {
 

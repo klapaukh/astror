@@ -21,8 +21,8 @@
 
 #include <Rcpp.h>
 
-#include "squish_luminance.hh"
-#include "solve_poisson.hh"
+#include "squish_luminance.h"
+#include "solve_poisson.h"
 
 //============================================================================
 //    main function

@@ -27,7 +27,7 @@
 #ifndef __SOLVE_POISSON_HH__
 #define __SOLVE_POISSON_HH__
 
-#include "shared_array.hh"
+#include "shared_array.h"
 
 
 

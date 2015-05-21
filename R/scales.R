@@ -25,7 +25,7 @@ extractLuminance <- function(red, green, blue) {
   if(!( all(dim(red) == dim(green)) & all(dim(green) == dim(blue)))){
     stop("red, green, and blue must all be the same size")
   }
-  if(any(missing(red),missing(green), missing(blue)){
+  if(any(missing(red),missing(green), missing(blue))){
      stop("A red, green, and blue must all be provided")
   }
 

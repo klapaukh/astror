@@ -62,31 +62,39 @@ using namespace Rcpp;
 //'        converge, and you'll need to abort this program.
 //' @export
 // [[Rcpp::export]]
-NumericVector gradientDomainHDRCompression(NumericMatrix extractedLuminance, double alpha, double beta, double delta, double theta, double epsilon, double saturation){
-				alpha = 0.1;
-				beta = 0.1;
-				delta = 1.1;
-				theta = 0;
-				epsilon = 0.0001;
-				saturation = 1;
-  int rows = luminance.rows();
-  int columns = luminance.columns();
-  
+NumericMatrix gradientDomainHDRCompression(NumericMatrix extractedLuminance, double alpha, double beta, double delta, double theta, double epsilon, double saturation){
+
+  alpha = 0.1;
+  beta = 0.1;
+  delta = 1.1;
+  theta = 0;
+  epsilon = 0.0001;
+  saturation = 1;
+
+  int rows = extractedLuminance.nrow();
+  int columns = extractedLuminance.ncol();
+
   SharedArray<float> luminance(rows * columns);
 
-
   //copy values from extractedLuminance to luminance
-  
+  for(int i =0; i < rows * columns ; i++){
+    luminance[i] = extractedLuminance[i];
+  }
+
 
   try{
     SquishLuminance(luminance, rows, columns, epsilon, alpha, beta, delta, theta);
   } catch (std::exception& exception) {
-	error(exception.what());
+    stop(exception.what());
   }
 
-  NumericMatrix result;
+  NumericMatrix result(rows,columns);
 
   //copy luminance to result;
+  for(int i =0; i < rows*columns; i++){
+    result[i]  = luminance[i];
+  }
+
 
   return result;
 

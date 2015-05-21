@@ -8,7 +8,7 @@
 #' @export
 slog <- function(values){
   m <- min(values);
-  return(log(values - (1.01 - m)));
+  return(log(values + (1.01 - m)));
 }
 
 
@@ -55,7 +55,7 @@ logLuminance <- slog;
 #' @param luminance The new luminance values
 #' @param Saturation constant (must be > 0)
 #' @export
-luminanceToColour <- function(red, green, blue, luminance, saturation) {
+luminanceToColour <- function(red, green, blue, luminance, saturation=1) {
   if (saturation <= 0){
     stop("saturation must be positive");
   }
@@ -68,15 +68,15 @@ luminanceToColour <- function(red, green, blue, luminance, saturation) {
 
   newRed   = saturation * slog(red   / intensity) + luminance;
   newGreen = saturation * slog(green / intensity) + luminance;
-  newblue  = saturation * slog(blue  / intensity) + luminance;
+  newBlue  = saturation * slog(blue  / intensity) + luminance;
 
   max = max(newRed,newGreen,newBlue)
 
-  newRed   = exp(newRed   - maximum);
-  newGreen = exp(newGreen - maximum);
-  newBlue  = exp(newBlue  - maximum);
+  newRed   = exp(newRed   - max);
+  newGreen = exp(newGreen - max);
+  newBlue  = exp(newBlue  - max);
 
-  return(list(red = newRed, green = newGreen, blue = newBlue));
+  return(simplify2array(list(red = newRed, green = newGreen, blue = newBlue)));
 }
 
 
@@ -88,7 +88,7 @@ luminanceToColour <- function(red, green, blue, luminance, saturation) {
 #' @export
 luminanceToGray <- function(luminance) {
   maximum = max(luminance)
-  result = exp(result - maximum)
+  result = exp(luminance - maximum)
   return(result);
 }
 

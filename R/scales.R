@@ -61,22 +61,21 @@ luminanceToColour <- function(red, green, blue, luminance, saturation=1) {
   }
         
   intensity = extractLuminance(red,green,blue);
-
   red = red - min(0,red) 
   green = green - min(0,green)
   blue = blue - min(0,blue)
 
-  newRed   = saturation * slog(red   / intensity) + luminance;
-  newGreen = saturation * slog(green / intensity) + luminance;
-  newBlue  = saturation * slog(blue  / intensity) + luminance;
+  red   = saturation * slog(red   / intensity) + luminance;
+  green = saturation * slog(green / intensity) + luminance;
+  blue  = saturation * slog(blue  / intensity) + luminance;
 
-  max = max(newRed,newGreen,newBlue)
+  max = max(red,green,blue)
 
-  newRed   = exp(newRed   - max);
-  newGreen = exp(newGreen - max);
-  newBlue  = exp(newBlue  - max);
+  red   = exp(red   - max);
+  green = exp(green - max);
+  blue  = exp(blue  - max);
 
-  return(simplify2array(list(red = newRed, green = newGreen, blue = newBlue)));
+  return(simplify2array(list(red = red, green = green, blue = blue)));
 }
 
 

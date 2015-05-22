@@ -77,11 +77,13 @@ NumericMatrix gradientDomainHDRCompression(NumericMatrix extractedLuminance,
   SharedArray<float> luminance(rows * columns);
 
   //copy values from extractedLuminance to luminance
-  for(int i =0; i < rows * columns ; i++){
-    luminance[i] = extractedLuminance[i];
-    if(std::isnan(extractedLuminance[i]) || NumericMatrix::is_na(extractedLuminance[i])
-                || !R_FINITE(extractedLuminance[i])){
-      stop("There is a missing or infinite value in the extractedLuminance. This is not allowed");
+  for(int r =0; r < rows ; r++){
+    for(int c = 0 ; c< columns; c++ ){
+      luminance[r*columns + c] = extractedLuminance(r,c);
+      if(std::isnan(extractedLuminance(r,c)) || NumericMatrix::is_na(extractedLuminance(r,c))
+                || !R_FINITE(extractedLuminance(r,c))){
+        stop("There is a missing or infinite value in the extractedLuminance. This is not allowed");
+      }
     }
   }
 
@@ -95,8 +97,10 @@ NumericMatrix gradientDomainHDRCompression(NumericMatrix extractedLuminance,
   NumericMatrix result(rows,columns);
 
   //copy luminance to result;
-  for(int i =0; i < rows*columns; i++){
-    result[i]  = luminance[i];
+  for(int r =0; r < rows; r++){
+    for(int c = 0 ; c<columns; c++){
+    result(r,c)  = luminance[r*columns + c];
+    }
   }
 
 

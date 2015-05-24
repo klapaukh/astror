@@ -67,8 +67,7 @@ NumericMatrix gradientDomainHDRCompression(NumericMatrix extractedLuminance,
     double beta = 0.1, 
     double delta = 1.1, 
     double theta = 0, 
-    double epsilon = 0.0001, 
-    double saturation = 1 
+    double epsilon = 0.0001
     ){
 
   int rows = extractedLuminance.nrow();
@@ -107,4 +106,5 @@ NumericMatrix gradientDomainHDRCompression(NumericMatrix extractedLuminance,
   return result;
 
 }
+
 

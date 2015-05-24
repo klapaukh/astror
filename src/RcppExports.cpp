@@ -6,19 +6,22 @@
 using namespace Rcpp;
 
 // gradientDomainHDRCompression
-NumericMatrix gradientDomainHDRCompression(NumericMatrix extractedLuminance, double alpha, double beta, double delta, double theta, double epsilon, double saturation);
-RcppExport SEXP astror_gradientDomainHDRCompression(SEXP extractedLuminanceSEXP, SEXP alphaSEXP, SEXP betaSEXP, SEXP deltaSEXP, SEXP thetaSEXP, SEXP epsilonSEXP, SEXP saturationSEXP) {
+NumericMatrix gradientDomainHDRCompression(NumericMatrix extractedLuminance, double alpha = 0.1, double beta = 0.1, double delta = 1.1, double theta = 0, double epsilon = 0.0001);
+RcppExport SEXP astror_gradientDomainHDRCompression(SEXP extractedLuminanceSEXP, SEXP alphaSEXP, SEXP betaSEXP, SEXP deltaSEXP, SEXP thetaSEXP, SEXP epsilonSEXP) {
 BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericMatrix >::type extractedLuminance(extractedLuminanceSEXP);
-    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    Rcpp::traits::input_parameter< double >::type beta(betaSEXP);
-    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
-    Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
-    Rcpp::traits::input_parameter< double >::type epsilon(epsilonSEXP);
-    Rcpp::traits::input_parameter< double >::type saturation(saturationSEXP);
-    __result = Rcpp::wrap(gradientDomainHDRCompression(extractedLuminance, alpha, beta, delta, theta, epsilon, saturation));
-    return __result;
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< NumericMatrix >::type extractedLuminance(extractedLuminanceSEXP );
+        Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP );
+        Rcpp::traits::input_parameter< double >::type beta(betaSEXP );
+        Rcpp::traits::input_parameter< double >::type delta(deltaSEXP );
+        Rcpp::traits::input_parameter< double >::type theta(thetaSEXP );
+        Rcpp::traits::input_parameter< double >::type epsilon(epsilonSEXP );
+        NumericMatrix __result = gradientDomainHDRCompression(extractedLuminance, alpha, beta, delta, theta, epsilon);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
 END_RCPP
 }

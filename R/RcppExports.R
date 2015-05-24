@@ -35,7 +35,7 @@
 #'        effect. One warning: if epsilon is too small, then the solution may never
 #'        converge, and you'll need to abort this program.
 #' @export
-gradientDomainHDRCompression <- function(extractedLuminance, alpha = 0.1, beta = 0.1, delta = 1.1, theta = 0, epsilon = 0.0001, saturation = 1) {
-    .Call('astror_gradientDomainHDRCompression', PACKAGE = 'astror', extractedLuminance, alpha, beta, delta, theta, epsilon, saturation)
+gradientDomainHDRCompression <- function(extractedLuminance, alpha = 0.1, beta = 0.1, delta = 1.1, theta = 0, epsilon = 0.0001) {
+    .Call('astror_gradientDomainHDRCompression', PACKAGE = 'astror', extractedLuminance, alpha, beta, delta, theta, epsilon)
 }
 

@@ -8,7 +8,7 @@
 #' @export
 slog <- function(values){
   m <- min(values);
-  return(log(values + (1.01 - m)));
+  return(log(values + (1.2 - m)));
 }
 
 

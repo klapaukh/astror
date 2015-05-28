@@ -8,7 +8,7 @@ A great deal of tweaking of the
 gets pleasing results.}
 \usage{
 gradientDomainHDRCompression(extractedLuminance, alpha = 0.1, beta = 0.1,
-  delta = 1.1, theta = 0, epsilon = 1e-04, saturation = 1)
+  delta = 1.1, theta = 0, epsilon = 1e-04)
 }
 \arguments{
 \item{alpha}{controls the point at which contrast-magnification gives way

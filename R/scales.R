@@ -19,11 +19,37 @@ slog <- function(values){
 #' @param values the values [matrix or vector] to scale
 #' @export
 linearScale <- function(values){
-  x <- x - min(x) #Set base to Zero
+  x <- values - min(values) #Set base to Zero
   x <- x / max(x) #Set max to 1
   return(x)
 }
 
+#' Geometrically scale a vector or matrix of values to fit in the range [0,1]
+#'
+#' Applies a geometric scaling function to ensure that all values are within
+#' the range [0,1]. The smallest value will always be mapped to 0, and the largest
+#' to 1. 
+#'
+#' @param values the values [vector or matrix] to scale
+#' @export
+geometricScale <- function(values){
+  values <- values - min(values) 
+  base   <- (1/2)^(1/max(values))
+  values <- base^(-values) - 1 
+  return (values)  
+}
+
+#' Clamp the lowest values to a percentile
+#'
+#' @param values the values to remove the bottom tail from
+#' @param fraction the fraction of values to clamp up
+#' @export
+clampBelowPercentile <- function(values,fraction=0.01){
+  cutOff <- quantile(values,fraction)
+  min = min(values[values > cutOff])
+  values[values <= cutOff] = min
+  return(values)
+}
 
 #' This is a function to extract log luminance values from the a set of RGB
 #' channels for use with the gradient domain high dynamic range compression

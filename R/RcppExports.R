@@ -22,18 +22,18 @@
 #' 
 #'
 #' @param alpha controls the point at which contrast-magnification gives way
-#'        to contrast-attenuation
+#'        to contrast-attenuation (0,1)
 #' @param beta controls the overall extent to which
-#'        contrast-squishing is performed
+#'        contrast-squishing is performed (0,1)
 #' @param theta Increasing theta causes large-scale
 #'        (spatially) contrast differences to be given greater importance, relative to
-#'        small-scale differences. 
-#' @param delta Changing delta seldom has any great effect. 
+#'        small-scale differences. [0,1]
+#' @param delta Changing delta seldom has any great effect. [1,Inf) 
 #' @param Epsilon is
 #'        the termination threshold--increasing it will reduce the quality of the
 #'        solution, but improve runtime, while decreasing it will have the opposite
 #'        effect. One warning: if epsilon is too small, then the solution may never
-#'        converge, and you'll need to abort this program.
+#'        converge, and you'll need to abort this program. (0,Inf)
 #' @export
 gradientDomainHDRCompression <- function(extractedLuminance, alpha = 0.1, beta = 0.1, delta = 1.1, theta = 0, epsilon = 0.0001) {
     .Call('astror_gradientDomainHDRCompression', PACKAGE = 'astror', extractedLuminance, alpha, beta, delta, theta, epsilon)

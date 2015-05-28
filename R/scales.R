@@ -11,6 +11,18 @@ slog <- function(values){
   return(log(values + (1.2 - m)));
 }
 
+#' Linearly scale values to fit in the range 0-1.
+#'
+#' This applies a linear scale to all of the values in the range such that 
+#' after the transformation all values are in the range [0,1]. 
+#'
+#' @param values the values [matrix or vector] to scale
+#' @export
+linearScale <- function(values){
+  x <- x - min(x) #Set base to Zero
+  x <- x / max(x) #Set max to 1
+  return(x)
+}
 
 
 #' This is a function to extract log luminance values from the a set of RGB

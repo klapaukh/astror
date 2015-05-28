@@ -42,7 +42,7 @@ void SolvePoisson(
 	SharedArray< float > const& rhs,
 	unsigned int const rows,
 	unsigned int const columns,
-	double const epsilon,    // termination criterion is this proportion of the L2 norm of rhs
+	double epsilon,    // termination criterion is this proportion of the L2 norm of rhs
 	unsigned int const innerIterations = 16
 );
 

@@ -30,6 +30,9 @@
 #include <limits>
 #include <cmath>
 
+#include <Rcpp.h>
+#include <ctime>
+
 #include "squish_luminance.h"
 #include "solve_poisson.h"
 #include "helpers.h"
@@ -451,7 +454,7 @@ void SolvePoisson(
 	SharedArray< float > const& rhs,
 	unsigned int const rows,
 	unsigned int const columns,
-	double const epsilon,    // termination criterion is this proportion of the L2 norm of rhs
+	double epsilon,    // termination criterion is this proportion of the L2 norm of rhs
 	unsigned int const innerIterations
 )
 {
@@ -509,6 +512,9 @@ void SolvePoisson(
 	SharedArray< float > residual( rows * columns );
 
 	unsigned int depth = 0;
+        
+        unsigned int r_progress = 0;
+        std::time_t startTime = std::time(NULL);
 
 	for ( ; ; ) {
 
@@ -539,7 +545,20 @@ void SolvePoisson(
 			residualNorm = std::sqrt( residualNorm / ( pyramidRows * pyramidColumns ) );
 		}
 
-		if ( ( residualNorm <= epsilon * rhsNorm ) || ( residualNorm < std::numeric_limits< double >::epsilon() ) ) {
+                r_progress++;
+
+                if(r_progress % 1000 == 0){
+                        std::time_t now = std::time(NULL);
+                        if(now - startTime >= 60){
+                          Rcpp::Rcout << "Stuff is happening on iter " << r_progress << ". Residual Norm: "  << residualNorm << " rhsNorm: " << rhsNorm << " required epsilon: " << residualNorm / rhsNorm << std::endl;
+                          epsilon *= 2;
+                          startTime = now;
+                        }
+                }
+
+                Rcpp::checkUserInterrupt();
+		
+                if ( ( residualNorm <= epsilon * rhsNorm ) || ( residualNorm < std::numeric_limits< double >::epsilon() ) ) {
 
 			if ( depth > 0 ) {
 
@@ -578,7 +597,9 @@ void SolvePoisson(
 				Restrict( nextPyramidRHS, residual, pyramidRows, pyramidColumns );
 
 				++depth;
-			}
+			}else{
+                          Rcpp::Rcout << "Else case happened. Residual Norm: "  << residualNorm << " rhsNorm: " << rhsNorm << " required epsilon: " << residualNorm / rhsNorm << std::endl;
+                        }
 		}
 	}
 }

@@ -51,6 +51,36 @@ clampBelowPercentile <- function(values,fraction=0.01){
   return(values)
 }
 
+#' Clamp the highest values to a percentile
+#'
+#' @param values the values to remove the top tail from
+#' @param fraction the fraction of values to clamp down
+#' @export
+clampAbovePercentile <- function(values,fraction=0.99){
+  cutOff <- quantile(values,fraction)
+  max = max(values[values < cutOff])
+  values[values >= cutOff] = max
+  return(values)
+}
+
+#' Clamp the lowest and highest values.
+#'
+#' @param values The values to remove the top and bottom from
+#' @param below Percentile below which to clamp up
+#' @param above Percentile above which to camp down
+#' @export
+clampPercentile <- function(values, below=0.01, above=0.99){
+  cutOff <- quantile(values, c(below, above))
+
+  top = max(values[values < cutOff[2] ])
+  bottom = min(values[values > cutOff[1]])
+
+  values[ values >= cutOff[2]] = top
+  values[ values <= cutOff[1]] = bottom 
+
+  return(values)
+}
+
 #' This is a function to extract log luminance values from the a set of RGB
 #' channels for use with the gradient domain high dynamic range compression
 #' algorithm. 

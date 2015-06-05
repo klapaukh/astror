@@ -6,22 +6,18 @@
 using namespace Rcpp;
 
 // gradientDomainHDRCompression
-NumericMatrix gradientDomainHDRCompression(NumericMatrix extractedLuminance, double alpha = 0.1, double beta = 0.1, double delta = 1.1, double theta = 0, double epsilon = 0.0001);
+NumericMatrix gradientDomainHDRCompression(NumericMatrix extractedLuminance, double alpha, double beta, double delta, double theta, double epsilon);
 RcppExport SEXP astror_gradientDomainHDRCompression(SEXP extractedLuminanceSEXP, SEXP alphaSEXP, SEXP betaSEXP, SEXP deltaSEXP, SEXP thetaSEXP, SEXP epsilonSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< NumericMatrix >::type extractedLuminance(extractedLuminanceSEXP );
-        Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP );
-        Rcpp::traits::input_parameter< double >::type beta(betaSEXP );
-        Rcpp::traits::input_parameter< double >::type delta(deltaSEXP );
-        Rcpp::traits::input_parameter< double >::type theta(thetaSEXP );
-        Rcpp::traits::input_parameter< double >::type epsilon(epsilonSEXP );
-        NumericMatrix __result = gradientDomainHDRCompression(extractedLuminance, alpha, beta, delta, theta, epsilon);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericMatrix >::type extractedLuminance(extractedLuminanceSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< double >::type epsilon(epsilonSEXP);
+    __result = Rcpp::wrap(gradientDomainHDRCompression(extractedLuminance, alpha, beta, delta, theta, epsilon));
+    return __result;
 END_RCPP
 }

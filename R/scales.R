@@ -70,7 +70,7 @@ clampAbovePercentile <- function(values,fraction=0.99){
 #' @param above Percentile above which to camp down
 #' @export
 clampPercentile <- function(values, below=0.01, above=0.99){
-  cutOff <- quantile(values, c(below, above))
+  cutOff <- quantile(values, c(below, above)) + 1e-6 #Attempt to deal with floating point
 
   top = max(values[values < cutOff[2] ])
   bottom = min(values[values > cutOff[1]])
